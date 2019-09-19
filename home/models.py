@@ -8,7 +8,7 @@ class poll_img_model(models.Model):
     '''
     label_p_big = models.CharField(max_length = 10)  #大标题
     label_p_little = models.CharField(max_length = 100) #小标题
-    label_img = models.ImageField(upload_to='images/%Y/%m/%d')  #图片路径
+    label_img = models.ImageField(upload_to='home/%Y/%m/%d')  #图片路径
     label_p_add_time = models.DateTimeField()  #添加时间
     is_show = models.BooleanField()  #是否显示
     is_delete = models.BooleanField()  #假删除
@@ -19,7 +19,7 @@ class middle_model(models.Model):
     '''
     label_p_big = models.CharField(max_length = 10)  #大标题
     label_p_little = models.CharField(max_length = 100) #小标题
-    label_img = models.ImageField(upload_to='images/%Y/%m/%d')  #图片路径
+    label_img = models.ImageField(upload_to='home/%Y/%m/%d')  #图片路径
     label_p_add_time = models.DateTimeField()  #添加时间
     is_show = models.BooleanField()  #是否显示
     is_delete = models.BooleanField()  #假删除

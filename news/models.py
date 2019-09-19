@@ -12,10 +12,10 @@ class ShowManager(models.Manager):
 class news_model(models.Model):
     news_title = models.CharField(max_length=50)  # 标题
     body = models.TextField()  # 内容
-    title_img = models.ImageField(upload_to='news/%Y/%m/%d')  # 图片路径
-    body_img_1 = models.ImageField(upload_to='news/%Y/%m/%d')  # 图片路径
-    body_img_2 = models.ImageField(upload_to='news/%Y/%m/%d')  # 图片路径
-    body_img_3 = models.ImageField(upload_to='news/%Y/%m/%d')  # 图片路径
+    title_img = models.ImageField(upload_to='news/')  # 图片路径
+    body_img_1 = models.ImageField(upload_to='news/')  # 图片路径
+    body_img_2 = models.ImageField(upload_to='news/')  # 图片路径
+    body_img_3 = models.ImageField(upload_to='news/')  # 图片路径
     add_time = models.DateTimeField()  # 添加时间
     clicks = models.IntegerField()  # 点击数量
     is_show = models.BooleanField()  # 是否显示

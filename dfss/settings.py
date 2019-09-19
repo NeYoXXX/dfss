@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'news.apps.NewsConfig',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,6 +53,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ]
+}
 
 ROOT_URLCONF = 'dfss.urls'
 
@@ -123,5 +132,16 @@ STATIC_URL = '/static/'
 
 
 # 媒体服务
-MEDIA_URL = '/media/'
+MEDIA_URL = '/dfss/media/'
 MEDIA_ROOT = os.path.join('/dfss/', 'media')
+
+
+# 跨域配置
+# 单个配置
+# CORS_ORIGIN_WHITELIST =(
+#    # '127.0.0.1:8000',
+# )
+# 正则配置:
+CORS_ORIGIN_REGEX_WHITELIST =(r'^(https?://)?（\w+\.)?jim\.com $',)
+
+CORS_ORIGIN_ALLOW_ALL = True

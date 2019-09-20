@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'news.apps.NewsConfig',
     'rest_framework',
-    'corsheaders',
+    'corsheaders',  # 跨域
+    # 'tinymce',  # 富文本
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +59,7 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
     ]
 }
 
@@ -145,3 +148,24 @@ MEDIA_ROOT = os.path.join('/dfss/', 'media')
 CORS_ORIGIN_REGEX_WHITELIST =(r'^(https?://)?（\w+\.)?jim\.com $',)
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+# 富文本
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'advanced',
+    'width': 600,
+    'height': 400,
+}
+
+# ckeditor 富文本编译器
+CKEDITOR_CONFIGS = {
+    # 将这份配置命名为 my_config
+    'my_config':  {
+        'toolbar': 'full',  # 工具条功能
+        'height': 300,  # 编辑器高度
+        'width': 800,  # 编辑器宽
+    },
+}
+CKEDITOR_UPLOAD_PATH = '/dfss/media/'
+# 上传图片保存路径，如果没有图片存储或者使用自定义存储位置，那么则直接写  '' ,如果是使用django本身的存储方式，那么你就指名一个目录用来存储即可。
+
+

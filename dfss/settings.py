@@ -41,13 +41,13 @@ INSTALLED_APPS = [
     'news.apps.NewsConfig',
     'rest_framework',
     'corsheaders',  # 跨域
-    # 'tinymce',  # 富文本
-    'ckeditor',
-    'ckeditor_uploader',
+    'ckeditor',  # 富文本
+    'ckeditor_uploader',  # 富文本上传图片
+    'case',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  #  支持跨域
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -146,26 +146,25 @@ MEDIA_ROOT = os.path.join('/dfss/', 'media')
 # )
 # 正则配置:
 CORS_ORIGIN_REGEX_WHITELIST =(r'^(https?://)?（\w+\.)?jim\.com $',)
-
 CORS_ORIGIN_ALLOW_ALL = True
 
-# 富文本
-TINYMCE_DEFAULT_CONFIG = {
-    'theme': 'advanced',
-    'width': 600,
-    'height': 400,
-}
 
 # ckeditor 富文本编译器
 CKEDITOR_CONFIGS = {
     # 将这份配置命名为 my_config
     'my_config':  {
         'toolbar': 'full',  # 工具条功能
-        'height': 300,  # 编辑器高度
-        'width': 800,  # 编辑器宽
+        'height': 700,  # 编辑器高度
+        'width': 1600,  # 编辑器宽
     },
 }
-CKEDITOR_UPLOAD_PATH = '/dfss/media/'
-# 上传图片保存路径，如果没有图片存储或者使用自定义存储位置，那么则直接写  '' ,如果是使用django本身的存储方式，那么你就指名一个目录用来存储即可。
+
+CKEDITOR_UPLOAD_PATH = 'cke_img'
+CKEDITOR_ALLOW_NONIMAGE_FILES = False  # 不允许非图片文件上传，默认为True
+CKEDITOR_BROWSE_SHOW_DIRS = False
+# CKEDITOR_RESTRICT_BY_USER = True
+CKEDITOR_RESTRICT_BY_DATE = False
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+# 富文本文档地址https://django-ckeditor.readthedocs.io/en/latest/#optional-for-file-upload
 
 

@@ -1,35 +1,29 @@
 from django.db import models
-from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
-
 # Create your models here.
-
 
 class ShowManager(models.Manager):
     def get_queryset(self):
         return super(ShowManager, self).get_queryset().filter(is_show=True, is_delete=False)
 
 
-class news_model(models.Model):
-    news_title = models.CharField(max_length=50, verbose_name='新闻标题')  # 标题
-
-
-    title_img = models.ImageField(upload_to='news/', verbose_name='标题图片')  # 图片路径
-    # body = models.TextField(verbose_name='新闻内容')  # 内容
-    body = RichTextUploadingField(config_name='my_config',verbose_name='内容')  # 富文本
-    # body_img_1 = models.ImageField(upload_to='news/', verbose_name='内容图片1', blank=True)  # 图片路径
-    # body_img_2 = models.ImageField(upload_to='news/', verbose_name='内容图片2', blank=True)  # 图片路径
-    # body_img_3 = models.ImageField(upload_to='news/', verbose_name='内容图片3', blank=True)  # 图片路径
+class CaseModel(models.Model):
+    title = models.CharField(max_length=50, verbose_name='案例标题')
+    title_img = models.ImageField(upload_to='news/', verbose_name='标题图片')
+    introduce = models.TextField(max_length=200, verbose_name='简介')
+    body = RichTextUploadingField(config_name='my_config', verbose_name='内容')
     add_time = models.DateTimeField(verbose_name='添加时间')  # 添加时间
     clicks = models.IntegerField(verbose_name='点击数量', blank=True, null=True)  # 点击数量
     is_show = models.BooleanField(verbose_name='是否显示')  # 是否显示
     is_delete = models.BooleanField(verbose_name='假删除')  # 假删除
+
     class Meta:
-        verbose_name_plural = '新闻管理'
+        verbose_name_plural = '案例管理'
         ordering = ('-add_time',)
 
     objects = models.Manager()  # 默认管理器
     show_manager = ShowManager()
+
 
     def profile(self):
         """
@@ -41,6 +35,4 @@ class news_model(models.Model):
         else:
             return str(self.body)
 
-    profile.short_description = '新闻内容'
-
-
+    profile.short_description = '内容'

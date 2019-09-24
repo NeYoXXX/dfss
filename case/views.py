@@ -10,3 +10,11 @@ from rest_framework.views import APIView
 class CaseListView(generics.ListAPIView):
     queryset = CaseModel.show_manager.all()
     serializer_class = CaseSerializer
+
+
+class CaseDetail(APIView):
+    def get(self,request):
+        id = request.GET.get('id')
+        model = CaseModel.show_manager.get(id=id)
+        serializer = CaseSerializer(model)
+        return Response(serializer.data)

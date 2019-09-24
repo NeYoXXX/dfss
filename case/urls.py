@@ -5,5 +5,5 @@ app_name = 'news'
 
 urlpatterns = [
     path('', views.CaseListView.as_view(), name=''),
-    path('details/', views.CaseListView.as_view()),
+    path('details/', views.CaseDetail.as_view()),
 ]

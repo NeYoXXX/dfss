@@ -10,3 +10,4 @@ class CaseModelAdmin(admin.ModelAdmin):
     date_hierarchy = 'add_time'  # 在搜索栏的下方，出现了时间层级导航条
     ordering = ('add_time', 'is_show',)  # 默认通过Status和Publish字段进行排序
     list_per_page = 10  # 每页中显示多少条数据
+    

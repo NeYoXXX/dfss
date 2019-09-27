@@ -23,14 +23,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '=+4dt%5f^lc5m%!2&^ai1*84va&@h($#y@&i@6zk^xud!8y+vo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['123.58.7.183']
+ALLOWED_HOSTS = ['123.58.7.183', '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'ckeditor',  # 富文本
     'ckeditor_uploader',  # 富文本上传图片
     'case',
+    'djcelery',
 ]
 
 MIDDLEWARE = [
@@ -167,4 +169,34 @@ CKEDITOR_RESTRICT_BY_DATE = False
 CKEDITOR_IMAGE_BACKEND = 'pillow'
 # 富文本文档地址https://django-ckeditor.readthedocs.io/en/latest/#optional-for-file-upload
 
+
+# celery定时任务配置
+import djcelery
+djcelery.setup_loader()
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+CELERY_IMPORTS = ('news.tasks', )
+CELERY_TIMEZONE = TIME_ZONE
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+
+# 下面是定时任务的设置，我一共配置了三个定时任务.
+from celery.schedules import crontab
+CELERYBEAT_SCHEDULE = {
+    #定时任务一：　每24小时周期执行任务(del_redis_data)
+    u'删除过期的redis数据': {
+        "task": "news.tasks.del_redis_data",
+        "schedule": 10.0,
+        "args": (),
+    },
+}
+
+
+# simpleui后台 官方文档：https://github.com/newpanjing/simpleui/blob/master/QUICK.md
+
+
+SIMPLEUI_HOME_INFO = False
+SIMPLEUI_HOME_QUICK = True
+SIMPLEUI_HOME_ACTION = True
+SIMPLEUI_ANALYSIS = False
+SIMPLEUI_INDEX = 'http://127.0.0.1:8000/api/admin'
+SIMPLEUI_DEFAULT_ICON = False
 
